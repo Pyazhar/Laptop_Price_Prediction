@@ -1,0 +1,300 @@
+<!-- predict.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Predict laptop prices with our laptop price prediction tool.">
+    <meta name="keywords" content="laptop price prediction, laptop prices, laptop pricing, laptop cost, predicting laptop prices, buy laptop, check befor buying a laptop">
+    <title>Predict Laptop Prices</title>
+    <!-- Include Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css"
+    />
+    
+
+    <!-- Add custom styles -->
+    <link rel= "stylesheet"  type = "text/css" href="static/main.css">
+
+    <style>
+      .container {
+        margin-top: 50px;
+      }
+      
+      body {
+        background-color: black;
+      }
+      .label {
+        color: white;
+      }
+      .result {
+        color: white;
+        font-size: 30px;
+      }
+      
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        gap: 10px;
+      }
+      
+      .form-group {
+        background-color: black;
+        padding: 0px;
+        text-align: center;
+      }
+    </style>
+    </head>
+  <body>
+    <div class="container">
+      <h1 style="color: white">Predict Laptop Prices</h1>
+      <!-- Create a form -->
+      <form id="predictf" method="POST" action="">
+        {% csrf_token %}
+        <div class="grid">
+          <div class="form-group">
+            <label class="label" for="company">Company</label>
+            <select class="form-control" id="company" required name="company">
+              <option value="">-- Select a Company --</option>
+              <option value="Acer">Acer</option>
+              <option value="Apple">Apple</option>
+              <option value="Asus">Asus</option>
+              <option value="Dell">Dell</option>
+              <option value="HP">HP</option>
+              <option value="Lenovo">Lenovo</option>
+              <option value="MSI">MSI</option>
+              <option value="Microsoft">Microsoft</option>
+              <option value="Toshiba">Toshiba</option>
+              <option value="Xiaomi">Xiaomi</option>
+              <option value="Chuwi">Chuwi</option>
+              <option value="Mediacom">Mediacom</option>
+              <option value="Samsung">Samsung</option>
+              <option value="Google">Google</option>
+              <option value="Razer">Razer</option>
+              <option value="Huawei">Huawei</option>
+              <option value="Vero">Vero</option>
+              <option value="Fujitsu">Fujitsu</option>
+              <option value="Mediacom">Mediacom</option>
+              <option value="LG">LG</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="label" for="typename">TypeName</label>
+            <select class="form-control" id="typename" required name="typename">
+              <option value="">-- Select a Type --</option>
+              <option value="Ultrabook">Ultrabook</option>
+              <option value="Notebook">Notebook</option>
+              <option value="Netbook">Netbook</option>
+              <option value="Gaming">Gaming</option>
+              <option value="2 in 1 Convertible">2 in 1 Convertible</option>
+              <option value="Workstation">Workstation</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="label" for="ram">RAM(GB)</label>
+            <input
+              type="number"
+              class="form-control"
+              id="ram"
+              placeholder="Please enter the ram"
+              name="ram"
+              maxlength="2"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label class="label" for="weight">Weight(kgs)</label>
+            <input
+              type="number"
+              class="form-control"
+              id="weight"
+              name="weight"
+              placeholder="Please enter the weight"
+              maxlength="2"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label class="label" for="Touchscreen">Touchscreen</label>
+            <select
+              class="form-control"
+              id="Touchscreen"
+              required
+              name="Touchscreen"
+            >
+              <option value="">-- Select a Screen Type --</option>
+              <option value="Yes">YES</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="label" for="Ips">Ips</label>
+            <select class="form-control" id="Ips" required name="Ips">
+              <option value="">-- Ips --</option>
+              <option value="Yes">YES</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="label" for="Screensize">Screen Size(Inches)</label>
+            <input
+              type="number"
+              class="form-control"
+              id="Screensize"
+              name="Screensize"
+              placeholder="Please enter the screen size"
+              maxlength="2"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label class="label" for="Resolution">Resolution</label>
+            <select
+              class="form-control"
+              id="Resolution"
+              required
+              name="Resolution"
+            >
+              <option value="">--Select a Resolution --</option>
+              <option value="1920x1080">1920x1080</option>
+              <option value="1366x768">1366x768</option>
+              <option value="1600x900">1600x900</option>
+              <option value="3840x2160">3840x2160</option>
+              <option value="3200x1800">3200x1800</option>
+              <option value="2880x1800">2880x1800</option>
+              <option value="2560x1600">2560x1600</option>
+              <option value="2560x1440">2560x1440</option>
+              <option value="2304x1440">2304x1440</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="label" for="cpu ">Cpu brand</label>
+            <select class="form-control" id="cpu" required name="cpu">
+              <option value="">--Select a Cpu --</option>
+              <option value="Intel Core i3">Intel Core i3</option>
+              <option value="Intel Core i5">Intel Core i5</option>
+              <option value="Intel Core i7">Intel Core i7</option>
+              <option value="AMD Processor">AMD Processor</option>
+              <option value="Other Intel Processor">
+                Other Intel Processor
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="label" for="hdd ">HDD(GB)</label>
+            <select class="form-control" id="hdd" required name="hdd">
+              <option value="">--Select a HDD --</option>
+              <option value="0">0</option>
+              <option value="128">128</option>
+              <option value="256">256</option>
+              <option value="512">512</option>
+              <option value="1024">1024</option>
+              <option value="2048">2048</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="label" for="ssd ">SSD(GB)</label>
+            <select class="form-control" id="ssd" required name="ssd">
+              <option value="">--Select a SSD --</option>
+              <option value="0">0</option>
+              <option value="8">8</option>
+              <option value="128">128</option>
+              <option value="256">256</option>
+              <option value="512">512</option>
+              <option value="1024">1024</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="label" for="gpu ">GPU</label>
+            <select class="form-control" id="gpu" required name="gpu">
+              <option value="">--Select a GPU --</option>
+              <option value="Intel">Intel</option>
+              <option value="Nvidia">Nvidia</option>
+              <option value="AMD">AMD</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="label" for="os">OS</label>
+            <select class="form-control" id="os" required name="os">
+              <option value="">--Select an OS --</option>
+              <option value="Windows">Windows</option>
+              <option value="Mac">Mac</option>
+              <option value="Others/No OS/Linux">Others/No OS/Linux</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Predict Price</button>
+        <!-- add a hidden input field to store the price variable -->
+        {% comment %} <input type="hidden" id="price" name="price" value=" {{price}} "> {% endcomment %}
+        
+
+      </form>
+      
+      <div id="result" class="mt-4">
+        <!-- Result will be displayed here -->
+         {% if price %}
+        <p class="result">Approximate Price is Rs {{ price }}</p>
+        {% endif %}  
+      </div>
+    </div>
+    <!-- Include jQuery and Bootstrap JS -->
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNVQ8qw"
+      crossorigin="anonymous"
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js">
+    </script>
+
+    
+      {% comment %} <script>
+        // Select the form by its ID
+        const form = document.querySelector("#predictf");
+        form.addEventListener("submit", (event) => {
+          // Prevent the default form submission behavior
+        
+          //console.log("form submitted")
+         
+        const formData = new FormData(form);
+       
+        const myVar = formData.get("price");
+        console.log(myVar);
+        swal({
+          title: "Success!",
+          text: "The approximate price is Rs" + myVar,
+          icon: "success",
+          timer: 120000, // specify how long the modal should stay open in milliseconds
+        });
+        });
+        
+      </script> {% endcomment %}
+  </body>
+</html>
